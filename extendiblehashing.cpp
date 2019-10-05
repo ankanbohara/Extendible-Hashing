@@ -38,7 +38,7 @@ void split(int sp_Index,Bucket * sp_Bucket)
 	vector<int>temp;
 	for(auto i : sp_Bucket->a)
 	{
-		temp.push_back(i);
+		temp.pb(i);
 	}
 	
 	sp_Bucket->a.clear();
@@ -60,7 +60,7 @@ void split(int sp_Index,Bucket * sp_Bucket)
 		for(auto i : temp)
 		{
 			int h = i & ((1<<gd) -1);
-			bmap[h]->a.push_back(i);
+			bmap[h]->a.pb(i);
 		}
 	}
 	else
@@ -72,7 +72,7 @@ void split(int sp_Index,Bucket * sp_Bucket)
 			/* code */
 			int last = i & (1<<(sp_Bucket->ld)) - 1;
 			if(last==k)
-				indices.push_back(i);
+				indices.pb(i);
 		}
 		newB->ld = ++sp_Bucket->ld;
 		for (int i = indices.size()/2; i < indices.size(); ++i)
@@ -83,7 +83,7 @@ void split(int sp_Index,Bucket * sp_Bucket)
 		for(auto i : temp)
 		{
 			int h = i & ((1<<gd) -1);
-			bmap[h]->a.push_back(i);
+			bmap[h]->a.pb(i);
 		}
 	}
 
@@ -92,7 +92,7 @@ void insert(int n)
 {
 	int h = n & ((1<<gd) - 1);
 	if(bmap[h]->a.size() < bucket_capacity)
-		bmap[h]->a.push_back(n);
+		bmap[h]->a.pb(n);
 	else
 	{
 		split(h,bmap[h]);
