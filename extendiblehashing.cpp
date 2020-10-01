@@ -5,6 +5,7 @@
 #define pb push_back
 #define all(a) a.begin(),a.end()
 #define cpresent(container,element) (find(all(container),element)!=container.end())
+#define rep(i, a, b) 	for(int i = a; i < b; ++i)
 using namespace std;
 
 struct Bucket
@@ -16,7 +17,7 @@ map<int,Bucket *>bmap;
 int gd,bucket_capacity;
 void display()
 {
-	for (int i = 0; i < (1<<gd); ++i)
+	rep(i,0,1<<gd)
 	{
 		/* code */
 		cout<<"Local depth of the bucket is : "<<bmap[i]->ld<<"\n";
@@ -48,7 +49,8 @@ void split(int sp_Index,Bucket * sp_Bucket)
 		bmap[sp_Index ^ (1<<gd)] = newB;
 		if(gd!=0)
 		{
-			for (int i = 0; i < (1<<gd); ++i)
+// 			for (int i = 0; i < (1<<gd); ++i)
+			rep(i,0,1<<gd)
 			{
 				/* code */
 				if(i!=sp_Index)
@@ -67,7 +69,8 @@ void split(int sp_Index,Bucket * sp_Bucket)
 	{
 		int k = sp_Index & (1<<(sp_Bucket->ld) - 1);
 		vector<int>indices;
-		for (int i = 0; i < (1<<gd); ++i)
+// 		for (int i = 0; i < (1<<gd); ++i)
+		rep(i,0,1<<gd)
 		{
 			/* code */
 			int last = i & (1<<(sp_Bucket->ld)) - 1;
@@ -75,7 +78,8 @@ void split(int sp_Index,Bucket * sp_Bucket)
 				indices.pb(i);
 		}
 		newB->ld = ++sp_Bucket->ld;
-		for (int i = indices.size()/2; i < indices.size(); ++i)
+// 		for (int i = indices.size()/2; i < indices.size(); ++i)
+		rep(i, indices.size()/2, indices.size())
 		{
 			bmap[indices[i]] = newB;
 		}
